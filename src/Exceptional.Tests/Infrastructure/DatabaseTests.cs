@@ -1,4 +1,4 @@
-﻿using Exceptional.Infrastructure.DatabaseImpl;
+﻿using Exceptional.Infrastructure;
 using Exceptional.Model;
 using Ploeh.AutoFixture;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Exceptional.Tests.Infrastructure.DatabaseImpl
+namespace Exceptional.Tests.Infrastructure
 {
     public class DatabaseTests
     {
@@ -23,7 +23,7 @@ namespace Exceptional.Tests.Infrastructure.DatabaseImpl
         }
 
         [Fact]
-        public void Insert_Query_Count_Update_Query_Delete()
+        public void Insert_SelectAll_Count_Update_QueryFirstOrDefault_Delete()
         {
             var user = autoFixture.Create<User>();
             database.Insert(user);

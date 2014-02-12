@@ -1,83 +1,34 @@
-﻿using FubuCore.Reflection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Exceptional.Infrastructure.DatabaseImpl
 {
-    public interface IQueryBuilder<TEntity>
-        where TEntity : class
+    public class WhereField
     {
-        IQueryBuilder<TEntity> Select<TSelector>(TSelector selector);
+        public string Name { get; set; }
+        public string Comparer { get; set; }
+        public object Value { get; set; }
 
-        IQueryBuilder<TEntity> Where<TCriteria>(TCriteria criteria);
-
-        IQueryBuilder<TEntity> SortBy(Expression<Func<TEntity, object[]>> sortExpressions);
-
-        int Count();
-
-        TEntity[] ToArray();
-
-        TEntity FirstOrDefault();
+        public string ToSqlString(int param)
+        {
+            return string.Format("[{0}] {1} @{2}", Name, Comparer, param);
+        }
     }
 
-    public class QueryBuilder<TEntity> : IQueryBuilder<TEntity>
-        where TEntity : class
+    public class SelectField
     {
-        public object selector = null;
-        public object criteria = null;
-        public Expression<Func<TEntity, object[]>> sortExpressions = null;
+        public PropertyInfo EntityProperty { get; set; }
+        public string Name { get; set; }
+    }
 
-        public string ExecutedSqlCommandString = null;
-
-        public readonly MsSqlQueryAdaptor queryAdaptor;
-
-        public QueryBuilder(MsSqlQueryAdaptor queryAdaptor)
-        {
-            this.queryAdaptor = queryAdaptor;
-        }
-
-        public IQueryBuilder<TEntity> Where<TCriteria>(TCriteria criteria)
-        {
-            this.criteria = criteria;
-            return this;
-        }
-
-        public IQueryBuilder<TEntity> SortBy(Expression<Func<TEntity, object[]>> sortExpressions)
-        {
-            this.sortExpressions = sortExpressions;
-            return this;
-        }
-
-        public int Count()
-        {
-            return queryAdaptor.ExecuteScalar(Query.BuildQuery(typeof(TEntity), selector, criteria).AsCount());
-        }
-
-        public TEntity[] ToArray()
-        {
-            return queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, criteria));
-        }
-
-        public TEntity FirstOrDefault()
-        {
-            var result = queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, criteria), 1);
-            if (result == null || result.Length < 1)
-            {
-                return null;
-            }
-
-            return result[0];
-        }
-
-        public IQueryBuilder<TEntity> Select<TSelector>(TSelector selector)
-        {
-            this.selector = selector;
-            return this;
-        }
+    public class SetField
+    {
+        public string Name { get; set; }
+        public object Value { get; set; }
     }
 
     public class Query
