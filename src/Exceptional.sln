@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional", "Exceptional\Exceptional.csproj", "{7C0E4DEC-EEC6-4DD2-81FA-EBC13B0FDCCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Tests", "Exceptional.Tests\Exceptional.Tests.csproj", "{4CBA7C3C-D2A2-44C0-8ED3-A13D9EF9F2EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Web", "Exceptional.Web\Exceptional.Web.csproj", "{3BB1FEFB-66E4-41B5-BA97-BBB13384A2E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.DatabaseMigrations", "Exceptional.DatabaseMigrations\Exceptional.DatabaseMigrations.csproj", "{9858D348-BD44-49B0-BFD8-C93B7F8FF67A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Client", "Exceptional.Client\Exceptional.Client.csproj", "{13616C3B-422F-4F1C-83B0-035E3EE7265F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Client.Messages", "Exceptional.Client.Messages\Exceptional.Client.Messages.csproj", "{127C4452-B489-4246-AAD2-6C0EB2F61531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Client.SampleWebsite", "Exceptional.Client.SampleWebsite\Exceptional.Client.SampleWebsite.csproj", "{C0BC8E62-2421-40A7-8060-F26ED633BA03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C0E4DEC-EEC6-4DD2-81FA-EBC13B0FDCCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0E4DEC-EEC6-4DD2-81FA-EBC13B0FDCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0E4DEC-EEC6-4DD2-81FA-EBC13B0FDCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0E4DEC-EEC6-4DD2-81FA-EBC13B0FDCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBA7C3C-D2A2-44C0-8ED3-A13D9EF9F2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBA7C3C-D2A2-44C0-8ED3-A13D9EF9F2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBA7C3C-D2A2-44C0-8ED3-A13D9EF9F2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBA7C3C-D2A2-44C0-8ED3-A13D9EF9F2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB1FEFB-66E4-41B5-BA97-BBB13384A2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB1FEFB-66E4-41B5-BA97-BBB13384A2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB1FEFB-66E4-41B5-BA97-BBB13384A2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB1FEFB-66E4-41B5-BA97-BBB13384A2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9858D348-BD44-49B0-BFD8-C93B7F8FF67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9858D348-BD44-49B0-BFD8-C93B7F8FF67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9858D348-BD44-49B0-BFD8-C93B7F8FF67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9858D348-BD44-49B0-BFD8-C93B7F8FF67A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13616C3B-422F-4F1C-83B0-035E3EE7265F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13616C3B-422F-4F1C-83B0-035E3EE7265F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13616C3B-422F-4F1C-83B0-035E3EE7265F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13616C3B-422F-4F1C-83B0-035E3EE7265F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{127C4452-B489-4246-AAD2-6C0EB2F61531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{127C4452-B489-4246-AAD2-6C0EB2F61531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{127C4452-B489-4246-AAD2-6C0EB2F61531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{127C4452-B489-4246-AAD2-6C0EB2F61531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0BC8E62-2421-40A7-8060-F26ED633BA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0BC8E62-2421-40A7-8060-F26ED633BA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0BC8E62-2421-40A7-8060-F26ED633BA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0BC8E62-2421-40A7-8060-F26ED633BA03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
