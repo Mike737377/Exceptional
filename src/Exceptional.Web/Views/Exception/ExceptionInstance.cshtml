@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "ExceptionInstance";
+}
+@model Exceptional.Domain.Exceptions.ExceptionDetailViewModel
+<div>
+    <div>
+        @Html.DisplayNameFor(x => x.DateTime)
+        @Html.DisplayTextFor(x => x.DateTime.ToString())
+    </div>
+    <div>
+        @Html.DisplayNameFor(x => x.ExceptionType)
+        @Html.DisplayTextFor(x => x.ExceptionType)
+    </div>
+    <div>
+        @Html.DisplayNameFor(x => x.Message)
+        @Html.DisplayTextFor(x => x.Message)
+    </div>
+    <div>
+        @Html.DisplayNameFor(x => x.StackTrace)
+        @Html.DisplayTextFor(x => x.StackTrace)
+    </div>
+</div>

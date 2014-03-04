@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model Exceptional.Domain.Exceptions.ExceptionViewModel
+<div>
+    <div>
+        @Html.DisplayNameFor(x => x.ExceptionType)
+        @Html.DisplayTextFor(x => x.ExceptionType)
+    </div>
+    <div>
+        @Html.DisplayNameFor(x => x.Message)
+        @Html.DisplayTextFor(x => x.Message)
+    </div>
+    <div>
+        @Html.DisplayNameFor(x => x.StackTrace)
+        @Html.DisplayTextFor(x => x.StackTrace)
+    </div>
+    <div>
+        @Html.DisplayTextFor(x => x.IsActive ? "Active" : "Resolved")
+    </div>
+    <div>
+        <h3>Occurrences</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <td>Url</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.Instances)
+                {
+                    <tr>
+                        <td>@Html.DisplayText(row.Date.ToString())</td>
+                        <td>@Html.DisplayText(row.Url)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
