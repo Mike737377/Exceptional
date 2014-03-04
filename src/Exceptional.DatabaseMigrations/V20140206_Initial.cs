@@ -12,6 +12,10 @@ namespace Exceptional.DatabaseMigrations
     {
         public override void Down()
         {
+            Delete.Table("ExceptionInstanceStateType");
+            Delete.Table("ExceptionInstanceState");
+            Delete.Table("ExceptionInstance");
+            Delete.Table("ExceptionType");
             Delete.Table("ApplicationUser");
             Delete.Table("Application");
             Delete.Table("UserSecurity");
@@ -44,8 +48,44 @@ namespace Exceptional.DatabaseMigrations
                 .WithColumn("ApiKey").AsGuid().Unique();
 
             Create.Table("ApplicationUser")
-                .WithColumn("ApplicationId").AsGuid().PrimaryKey().ForeignKey("Application", "ApplicationId")
-                .WithColumn("UserId").AsGuid().PrimaryKey().ForeignKey("User", "UserId");
+                .WithColumn("ApplicationUserId").AsGuid().PrimaryKey()
+                .WithColumn("ApplicationId").AsGuid().ForeignKey("Application", "ApplicationId")
+                .WithColumn("UserName").AsString();
+
+            Create.Table("ExceptionGroup")
+                .WithColumn("ExceptionGroupId").AsGuid().PrimaryKey()
+                .WithColumn("ApplicationId").AsGuid().ForeignKey("Application", "ApplicationId")
+                .WithColumn("ExceptionHash").AsString()
+                .WithColumn("ExceptionType").AsString(1000)
+                .WithColumn("Message").AsString(1000);
+
+            Create.Table("ExceptionInstance")
+                .WithColumn("ExceptionInstanceId").AsGuid().PrimaryKey()
+                .WithColumn("ExceptionGropuId").AsGuid().ForeignKey("ExceptionGroup", "ExceptionGroupId")
+                .WithColumn("UserId").AsGuid().ForeignKey("ApplicationUser", "ApplicationUserId")
+                .WithColumn("DateOccurred").AsDateTime()
+                .WithColumn("MachineName").AsString()
+                .WithColumn("Url").AsString(1000)
+                .WithColumn("UrlReferrer").AsString(1000)
+                .WithColumn("HttpCode").AsInt32().Nullable()
+                .WithColumn("HtmlErrorMessage").AsString(1000);
+
+            Create.Table("ExceptionInstanceStateType")
+                .WithColumn("ExceptionInstanceStateTypeId").AsInt32().PrimaryKey()
+                .WithColumn("Name").AsString();
+
+            Insert.IntoTable("ExceptionInstanceStateType")
+                .Row(new { ExceptionInstanceStateTypeId = 0, Name = "Server" })
+                .Row(new { ExceptionInstanceStateTypeId = 1, Name = "QueryString" })
+                .Row(new { ExceptionInstanceStateTypeId = 2, Name = "Application" })
+                .Row(new { ExceptionInstanceStateTypeId = 3, Name = "Form" })
+                .Row(new { ExceptionInstanceStateTypeId = 4, Name = "Cookie" });
+
+            Create.Table("ExceptionInstanceState")
+                .WithColumn("ExceptionInstanceId").AsGuid().PrimaryKey().ForeignKey("ExceptionInstance", "ExceptionInstanceId")
+                .WithColumn("StateTypeId").AsInt32().PrimaryKey().ForeignKey("ExceptionInstanceStateType", "ExceptionInstanceStateTypeId")
+                .WithColumn("Key").AsString(255).PrimaryKey()
+                .WithColumn("Value").AsString(1000);
         }
     }
 }

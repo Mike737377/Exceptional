@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Exceptional.Model
 {
-    public class ExceptionInfo
+    public class ExceptionGroup
     {
-        public Guid ExceptionId { get; set; }
+        public Guid ExceptionGroupId { get; set; }
         public Guid ApplicationId { get; set; }
         public int ExceptionHash { get; set; }
         public string Message { get; set; }
+        public string ExceptionType { get; set; }
     }
 }
