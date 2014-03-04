@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Exceptional.Infrastructure.DatabaseImpl
         public Type EntityType { get; private set; }
         public SelectField[] SelectFields { get; private set; }
         public WhereField[] WhereFields { get; private set; }
+        public Query JoinedQuery { get; private set; }
 
         public Query(Type entityType, SelectField[] selectFields, WhereField[] whereFields)
         {
@@ -44,7 +46,7 @@ namespace Exceptional.Infrastructure.DatabaseImpl
             this.WhereFields = whereFields;
         }
 
-        public static Query BuildQuery(Type entityType, object selector, object where)
+        public static Query BuildQuery(Type entityType, object selector, object where, object sortExpressions, Query joinedQuery)
         {
             var selectFields = GetSelectFields(entityType, selector);
             var whereFields = GetWhereFields(entityType, where);
@@ -87,6 +89,24 @@ namespace Exceptional.Infrastructure.DatabaseImpl
             });
 
             return whereFields.ToArray();
+        }
+
+        private string[] GetJoinedFields()
+        {
+            List<string> joinedFields = new List<string>();
+
+            EntityType.GetProperties().Each(right =>
+                {
+                    JoinedQuery.EntityType.GetProperties().Each(left =>
+                        {
+                            if (right.Name.Equals(left.Name))
+                            {
+                                joinedFields.Add(left.Name);
+                            }
+                        });
+                });
+
+            return joinedFields.ToArray();
         }
 
         public Query AsCount()

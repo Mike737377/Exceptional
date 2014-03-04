@@ -13,19 +13,26 @@ namespace Exceptional.Infrastructure
         where TEntity : class
     {
         public object selector = null;
-        public object criteria = null;
+        public object where = null;
         public Expression<Func<TEntity, object[]>> sortExpressions = null;
 
         public readonly IQueryAdaptor queryAdaptor;
+        private readonly Query joinedQuery;
 
         public QueryBuilder(IQueryAdaptor queryAdaptor)
         {
             this.queryAdaptor = queryAdaptor;
         }
 
+        public QueryBuilder(IQueryAdaptor queryAdaptor, Query joinedQuery)
+        {
+            this.queryAdaptor = queryAdaptor;
+            this.joinedQuery = joinedQuery;
+        }
+
         public IQueryBuilder<TEntity> Where<TCriteria>(TCriteria criteria)
         {
-            this.criteria = criteria;
+            this.where = criteria;
             return this;
         }
 
@@ -37,17 +44,17 @@ namespace Exceptional.Infrastructure
 
         public int Count()
         {
-            return queryAdaptor.ExecuteScalar(Query.BuildQuery(typeof(TEntity), selector, criteria).AsCount());
+            return queryAdaptor.ExecuteScalar(Query.BuildQuery(typeof(TEntity), selector, where, sortExpressions, joinedQuery).AsCount());
         }
 
         public TEntity[] ToArray()
         {
-            return queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, criteria));
+            return queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, where, sortExpressions, joinedQuery));
         }
 
         public TEntity FirstOrDefault()
         {
-            var result = queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, criteria), 1);
+            var result = queryAdaptor.ExecuteReader<TEntity>(Query.BuildQuery(typeof(TEntity), selector, where, sortExpressions, joinedQuery), 1);
             if (result == null || result.Length < 1)
             {
                 return null;
@@ -60,6 +67,13 @@ namespace Exceptional.Infrastructure
         {
             this.selector = selector;
             return this;
+        }
+
+        public IQueryBuilder<TJoin> Join<TJoin>(TJoin join)
+            where TJoin : class
+        {
+            var query = Query.BuildQuery(typeof(TEntity), selector, where, sortExpressions, joinedQuery);
+            return new QueryBuilder<TJoin>(queryAdaptor, query);
         }
     }
 }
