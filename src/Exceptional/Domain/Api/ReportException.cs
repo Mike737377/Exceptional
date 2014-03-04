@@ -1,4 +1,5 @@
-﻿using Exceptional.Infrastructure;
+﻿using Exceptional.Client.Messages;
+using Exceptional.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,14 @@ namespace Exceptional.Domain.Api
     [Serializable]
     public class ReportException : IMessage
     {
-        public string ExceptionMessage { get; set; }
-        public string StackTrace { get; set; }
-        public string UserName { get; set; }
+        public ReportException()
+        {
+            Report = new ExceptionalReport();
+            Details = new ExceptionDetails();
+        }
+
+        public Guid ApiKey { get; set; }
+        public ExceptionalReport Report { get; set; }
+        public ExceptionDetails Details { get; set; }
     }
 }

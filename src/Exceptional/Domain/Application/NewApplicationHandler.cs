@@ -9,6 +9,10 @@ namespace Exceptional.Domain.Application
 {
     public class NewApplicationHandler : IHandler<NewApplication>
     {
+        public NewApplicationHandler(IDatabase database)
+        {
+        }
+
         public void Execute(NewApplication message)
         {
             throw new NotImplementedException();
