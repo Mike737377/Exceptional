@@ -30,14 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FubuCore">
-      <HintPath>..\packages\FubuCore.1.2.0.272\lib\FubuCore.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="FubuCore, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FubuCore.1.3.0.278\lib\FubuCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.16.6.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoFixture.3.16.6\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -63,6 +75,17 @@
     <Compile Include="Domain\Application\NewApplication.cs" />
     <Compile Include="Domain\Application\ApplicationCreated.cs" />
     <Compile Include="Domain\Application\NewApplicationHandler.cs" />
+    <Compile Include="Domain\Exceptions\ExceptionDetailViewModel.cs" />
+    <Compile Include="Domain\Exceptions\ExceptionInfoViewModel.cs" />
+    <Compile Include="Domain\Exceptions\GetExceptionDetail.cs" />
+    <Compile Include="Domain\Exceptions\GetExceptionDetailHandler.cs" />
+    <Compile Include="Domain\Exceptions\GetExceptionInfo.cs" />
+    <Compile Include="Domain\Exceptions\GetExceptionInfoHandler.cs" />
+    <Compile Include="Domain\TestData\CreateTestData.cs" />
+    <Compile Include="Domain\TestData\CreateTestDataHandler.cs" />
+    <Compile Include="Domain\UserExperience\GetUserExperience.cs" />
+    <Compile Include="Domain\UserExperience\GetUserExperienceHandler.cs" />
+    <Compile Include="Domain\UserExperience\UserExceperienceViewModel.cs" />
     <Compile Include="ErrorModule.cs" />
     <Compile Include="ExceptionalException.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -77,6 +100,7 @@
     <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerInsertAdaptor.cs" />
     <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerQueryAdaptor.cs" />
     <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerUpdateAdaptor.cs" />
+    <Compile Include="Infrastructure\Mapper.cs" />
     <Compile Include="Infrastructure\QueryBuilder.cs" />
     <Compile Include="Infrastructure\HandlerRegistry.cs" />
     <Compile Include="Infrastructure\IApplicationBus.cs" />
@@ -87,10 +111,9 @@
     <Compile Include="Infrastructure\MessageEnvelope.cs" />
     <Compile Include="Infrastructure\ServiceFactory.cs" />
     <Compile Include="Model\Application.cs" />
-    <Compile Include="Model\ApplicationState.cs" />
+    <Compile Include="Model\ExceptionInstanceState.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
-    <Compile Include="Model\ExceptionDetails.cs" />
-    <Compile Include="Model\ExceptionInfo.cs" />
+    <Compile Include="Model\ExceptionGroup.cs" />
     <Compile Include="Model\ExceptionInstance.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\User.cs" />
@@ -102,8 +125,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Exceptions\" />
-    <Folder Include="Domain\UserExperience\" />
+    <ProjectReference Include="..\Exceptional.Client.Messages\Exceptional.Client.Messages.csproj">
+      <Project>{127c4452-b489-4246-aad2-6c0eb2f61531}</Project>
+      <Name>Exceptional.Client.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
