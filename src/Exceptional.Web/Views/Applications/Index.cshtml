@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Applications";
+}
+
+<h2>Applications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Url</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{application name}</td>
+            <td>{url}</td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Application</button>
+@Html.Modal("myModal", "NewApplication")

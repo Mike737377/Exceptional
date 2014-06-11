@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Exceptional.Web.Controllers
 {
-    public class ApplicationController : Controller
+    public class ApplicationsController : Controller
     {
         //
-        // GET: /Application/
+        // GET: /Applications/
 
         public ActionResult Index()
         {
