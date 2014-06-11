@@ -47,6 +47,9 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="NPoco">
+      <HintPath>..\packages\NPoco.2.4.68\lib\net40\NPoco.dll</HintPath>
+    </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.16.6.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoFixture.3.16.6\lib\net40\Ploeh.AutoFixture.dll</HintPath>
@@ -92,16 +95,7 @@
     <Compile Include="Infrastructure\ApplicationBus.cs" />
     <Compile Include="Infrastructure\ApplicationBusContext.cs" />
     <Compile Include="Infrastructure\Database.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\IAdaptors.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\Model.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerAdaptor.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\IDatabaseAdaptor.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerDeleteAdaptor.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerInsertAdaptor.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerQueryAdaptor.cs" />
-    <Compile Include="Infrastructure\DatabaseImpl\SqlServer\SqlServerUpdateAdaptor.cs" />
     <Compile Include="Infrastructure\Mapper.cs" />
-    <Compile Include="Infrastructure\QueryBuilder.cs" />
     <Compile Include="Infrastructure\HandlerRegistry.cs" />
     <Compile Include="Infrastructure\IApplicationBus.cs" />
     <Compile Include="Infrastructure\IDatabase.cs" />

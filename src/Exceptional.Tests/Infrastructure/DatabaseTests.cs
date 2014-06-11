@@ -22,24 +22,24 @@ namespace Exceptional.Tests.Infrastructure
             public DateTime Date { get; set; }
         }
 
-        [Fact]
-        public void Insert_SelectAll_Count_Update_QueryFirstOrDefault_Delete()
-        {
-            var user = autoFixture.Create<User>();
-            database.Insert(user);
+        //[Fact]
+        //public void Insert_SelectAll_Count_Update_QueryFirstOrDefault_Delete()
+        //{
+        //    var user = autoFixture.Create<User>();
+        //    database.Insert(user);
 
-            Console.WriteLine(database.Query<User>().ToArray().ToJsonString());
-            Console.WriteLine("Count = {0}", database.Query<User>().Count());
+        //    Console.WriteLine(database.Query<User>().ToArray().ToJsonString());
+        //    Console.WriteLine("Count = {0}", database.Query<User>().Count());
 
-            user.Name = "New NAME!";
-            database.Update(user);
+        //    user.Name = "New NAME!";
+        //    database.Update(user);
 
-            Console.WriteLine(database.Query<User>()
-                    .Where(new User() { UserId = user.UserId })
-                    .SortBy(x => new[] { x.Name })
-                    .FirstOrDefault().ToJsonString());
+        //    Console.WriteLine(database.Query<User>()
+        //            .Where(new User() { UserId = user.UserId })
+        //            .SortBy(x => new[] { x.Name })
+        //            .FirstOrDefault().ToJsonString());
 
-            database.Delete(user);
-        }
+        //    database.Delete(user);
+        //}
     }
 }
