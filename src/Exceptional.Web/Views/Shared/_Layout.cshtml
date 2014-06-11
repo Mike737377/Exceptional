@@ -8,30 +8,38 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", false)
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <header>
+    @Html.Partial("_Header")
 
-        <div class="content-wrapper">
-            @Html.Partial("_MainMenu")
-        </div>
-    </header>
-    <div id="body">
-        @Html.Partial("_SideMenu")
+@*    <div id="body">
+        
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
+            
         </section>
-    </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-            </div>
-        </div>
-    </footer>
+    </div>*@
 
-    @Scripts.Render("~/bundles/jquery")
+    <div class="container-fluid">
+      <div class="row">
+          @Html.Partial("_SideMenu")
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+            @RenderBody()
+        </div>
+      </div>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/content/bootstrap/js/bootstrap.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
