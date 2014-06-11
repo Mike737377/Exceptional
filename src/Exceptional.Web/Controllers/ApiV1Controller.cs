@@ -8,12 +8,12 @@ using System.Web.Http;
 
 namespace Exceptional.Web.Controllers
 {
-    [RoutePrefix("api/{apiKey}")]
-    public class ApplicationApiController : ApiBaseController
+    [RoutePrefix("api/v1/{apiKey}")]
+    public class ApiV1Controller : ApiBaseController
     {
-        //
-        // GET: /Api/
+
         [AllowAnonymous]
+        [Route(""), HttpGet]
         public string Index(string apiKey)
         {
             return string.Format(@"Pong {0} @ {1}", apiKey, DateTime.UtcNow.ToString("o"));
@@ -27,7 +27,7 @@ namespace Exceptional.Web.Controllers
             {
                 //StackTrace = report.StackTrace,
                 //ExceptionMessage = report.Message,
-                UserName = report.UserName
+                //UserName = report.UserName
             };
             Bus.Send(exceptionReport);
             return report.ExceptionInstanceId;
