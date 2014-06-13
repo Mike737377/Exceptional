@@ -152,12 +152,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CassetteConfiguration.cs" />
-    <Compile Include="Controllers\ApiV1Controller.cs" />
+    <Compile Include="Controllers\API\V1\ApplicationsApiController.cs" />
+    <Compile Include="Controllers\API\V1\ClientApiController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ExceptionController.cs" />
+    <Compile Include="Controllers\API\V1\ExceptionsApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserExperienceController.cs" />
+    <Compile Include="Controllers\API\V1\UsersApiController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +170,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angular\angular-route.min.js" />
+    <Content Include="Content\angular\angular.min.js" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -265,6 +270,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="SiteTemplate.html" />
+    <Content Include="Views\Applications\ApplicationModule.ts" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -306,11 +312,14 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Applications\NewApplication.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
-    <Content Include="Views\Exception\ExceptionInfo.cshtml" />
-    <Content Include="Views\Exception\ExceptionInstance.cshtml" />
+    <Content Include="Views\Exceptions\ExceptionInfo.cshtml" />
+    <Content Include="Views\Exceptions\ExceptionInstance.cshtml" />
     <Content Include="Views\Shared\_MainMenu.cshtml" />
     <Content Include="Views\Shared\_SideMenu.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_ApplicationSelector.cshtml" />
+    <Content Include="Views\Exceptions\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

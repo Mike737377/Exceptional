@@ -94,3 +94,15 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+
+
+.modal-dialog {
+    background-color: #ffffff;
+}
+
+.modal-header {
+    background-color:  #428bca;
+    color: #ffffff;
+}

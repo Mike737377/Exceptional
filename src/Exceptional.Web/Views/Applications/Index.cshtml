@@ -1,22 +1,25 @@
 ﻿@{
+    Layout = "";
     ViewBag.Title = "Applications";
 }
 
-<h2>Applications</h2>
+<h1 class="page-header">Applications</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Url</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{application name}</td>
-            <td>{url}</td>
-        </tr>
-    </tbody>
-</table>
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Application</button>
-@Html.Modal("myModal", "NewApplication")
+<div ng-controller="ApplicationsController">    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Url</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="app in applications">
+                <td>{{app.Name}}</td>
+                <td><a href="{{app.Website}}">{{app.Website}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Application</button>
+    @Html.Modal("myModal", "NewApplication")
+</div>

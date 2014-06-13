@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "";
+    ViewBag.Title = "Users";
+}
+
+<h1 class="page-header">Users</h1>
+
+<div ng-controller="UsersController">    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New User</button>
+    @*@Html.Modal("myModal", "NewUser")*@
+</div>

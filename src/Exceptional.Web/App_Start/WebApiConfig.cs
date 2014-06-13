@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -11,6 +13,17 @@ namespace Exceptional.Web
         {
             config.MapHttpAttributeRoutes();
 
+
+
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+            formatters.Remove(formatters.XmlFormatter);
+
+
+            //JsonSerializerSettings serializerSettings = new JsonSerializerSettings();
+            //serializerSettings.Converters.Add(new IsoDateTimeConverter());
+            //config.Formatters[0] = new JsonConverter(serializerSettings);
+
+
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApi",
             //    routeTemplate: "webapi/{controller}/{id}",
@@ -22,5 +35,7 @@ namespace Exceptional.Web
             // For more information, visit http://go.microsoft.com/fwlink/?LinkId=279712.
             //config.EnableQuerySupport();
         }
+
+  
     }
 }

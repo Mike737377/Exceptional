@@ -19,22 +19,22 @@ namespace Exceptional.Domain.Api
 
         public void Execute(ReportException message)
         {
-            var application = database.Query<Model.Application>().Where(new { ApiKey = message.ApiKey }).FirstOrDefault();
+            var application = database.FetchWhere<Model.Application>(x => x.ApiKey == message.ApiKey).FirstOrDefault();
 
             var exceptionInfo = Mapper.Map(message.Report).To<ExceptionGroup>();
             var exceptionDetail = Mapper.Map(message.Details).To<ExceptionInstance>();
-            var applicationUser = new ApplicationUser()
-            {
-                ApplicationId = application.ApplicationId,
-                UserName = message.Report.UserName
-            };
 
-            var existingUser = database.Query<ApplicationUser>().Where(applicationUser).FirstOrDefault();
+            var existingUser = database.FetchWhere<ApplicationUser>(x => x.ApplicationId == application.ApplicationId && x.UserName == message.Report.UserName).FirstOrDefault();
 
             if (existingUser == null)
             {
-                database.Insert(applicationUser);
-                existingUser = applicationUser;
+                existingUser = new ApplicationUser()
+                {
+                    ApplicationId = application.ApplicationId,
+                    UserName = message.Report.UserName
+                };
+
+                database.Insert(existingUser);                
             }
 
             database.Insert(exceptionInfo);

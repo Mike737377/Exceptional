@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="exceptionalApp">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - My ASP.NET MVC Application</title>
@@ -17,21 +17,11 @@
 </head>
 <body>
     @Html.Partial("_Header")
-
-@*    <div id="body">
-        
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            
-        </section>
-    </div>*@
-
     <div class="container-fluid">
       <div class="row">
           @Html.Partial("_SideMenu")
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
             @RenderBody()
         </div>
       </div>
@@ -40,6 +30,66 @@
     @*@Scripts.Render("~/bundles/jquery")*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/content/angular/angular.min.js"></script>
+    <script src="/content/angular/angular-route.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("exceptionalApp", ['ngRoute']);
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/applications',
+                {
+                    controller: 'ApplicationsController',
+                    templateUrl: '/applications/'
+                })
+                .when('/users',
+                {
+                    controller: 'UsersController',
+                    templateUrl: '/users/'
+                });
+        });
+
+        app.controller('ApplicationsController', function ($scope, applicationsFactory) {
+            function init() {
+                applicationsFactory.getApplications().success(function (data) {
+                    $scope.applications = data;
+                });
+            }
+
+            init();
+        });
+
+
+        app.controller('UsersController', function ($scope, usersFactory) {
+            function init() {
+                usersFactory.getUsers().success(function (data) {
+                    $scope.users = data;
+                });
+            }
+
+            init();
+        });
+
+        app.factory('applicationsFactory', function ($http) {
+            var factory = {};
+
+            factory.getApplications = function () {
+                return $http.get('/api/v1/applications');
+            };
+
+            return factory;
+        });
+
+        app.factory('usersFactory', function ($http) {
+            var factory = {};
+
+            factory.getUsers = function () {
+                return $http.get('/api/v1/users');
+            };
+
+            return factory;
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
