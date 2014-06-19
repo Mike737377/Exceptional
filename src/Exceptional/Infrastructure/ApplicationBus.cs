@@ -16,36 +16,16 @@ namespace Exceptional.Infrastructure
         }
 
         public void Send<TMessage>(TMessage message)
-            where TMessage : IMessage
         {
             var handler = handlerRegistry.GetHandlerForMessage<TMessage>();
             handler.Execute(message);
         }
 
-        public void SendAndAwaitReply<TMessage>(TMessage message)
-            where TMessage : IMessage
+        public TReply Send<TMessage, TReply>(TMessage message)
         {
-            Send(message);
+            var handler = handlerRegistry.GetHandlerForMessage<TMessage, TReply>();
+            return handler.Execute(message);
         }
 
-        public void Reply<TMessage>(TMessage message)
-            where TMessage : IMessage
-        {
-            throw new NotImplementedException();
-        }
-
-        public class MessageMediator
-        {
-            private Dictionary<Guid, object> waitSignals = new Dictionary<Guid, object>();
-
-            public void Notify(MessageEnvelope envelope)
-            {
-            }
-
-            public void Await(MessageEnvelope envelope)
-            {
-                //Task.Factory.StartNew(
-            }
-        }
     }
 }

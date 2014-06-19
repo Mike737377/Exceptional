@@ -8,7 +8,18 @@ namespace Exceptional.Model
 {
     public class Application : IEntity
     {
-        public Guid ApplicationId { get; set; }
+
+        public Application()
+        {
+            ApplicationId = GuidHelper.GenerateComb();
+        }
+
+        public Application(Guid applicationId)
+        {
+            ApplicationId = applicationId;
+        }
+
+        public Guid ApplicationId { get; protected set; }
         public string Name { get; set; }
         public string Website { get; set; }
         public Guid ApiKey { get; set; }

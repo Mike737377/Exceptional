@@ -32,7 +32,7 @@ namespace Exceptional.DatabaseMigrations
                 .WithColumn("Name").AsAnsiString(255);
 
             Create.Table("UserSecurity")
-                .WithColumn("UserId").AsGuid().PrimaryKey()
+                .WithColumn("UserId").AsGuid().PrimaryKey().ForeignKey("User", "UserId")
                 .WithColumn("Password").AsAnsiString(255)
                 .WithColumn("DateCreated").AsDateTime();
 
@@ -45,7 +45,11 @@ namespace Exceptional.DatabaseMigrations
                 .WithColumn("Name").AsAnsiString(255)
                 .WithColumn("DateCreated").AsDateTime()
                 .WithColumn("Website").AsAnsiString(255)
-                .WithColumn("ApiKey").AsGuid().Unique();
+                .WithColumn("ApiKey").AsGuid().Unique().Indexed();
+
+            Create.Table("UserApplication")
+                .WithColumn("UserId").AsGuid().PrimaryKey().ForeignKey("User", "UserId")
+                .WithColumn("ApplicationId").AsGuid().PrimaryKey().ForeignKey("Application", "ApplicationId");
 
             Create.Table("ApplicationUser")
                 .WithColumn("ApplicationUserId").AsGuid().PrimaryKey()
@@ -68,7 +72,8 @@ namespace Exceptional.DatabaseMigrations
                 .WithColumn("Url").AsString(1000)
                 .WithColumn("UrlReferrer").AsString(1000)
                 .WithColumn("HttpCode").AsInt32().Nullable()
-                .WithColumn("HtmlErrorMessage").AsString(1000);
+                .WithColumn("HtmlErrorMessage").AsString(1000)
+                .WithColumn("ExtendedData").AsString(1000000);
 
             Create.Table("ExceptionInstanceStateType")
                 .WithColumn("ExceptionInstanceStateTypeId").AsInt32().PrimaryKey()

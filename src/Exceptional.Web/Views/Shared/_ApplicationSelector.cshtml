@@ -1,11 +1,11 @@
-﻿<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-    Dropdown
+﻿<div class="dropdown" ng-controller="ApplicationsController">
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+        Select Application
     <span class="caret"></span>
-</button>
-<div class="dropdown">
+    </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li role="presentation" ng-controller="ApplicationsController" ng-repeat="app in applications"><a role="menuitem" tabindex="-1" href="{{app.Name}}">{{app.Name}}</a></li>
+        <li role="presentation" ng-repeat="app in applications"><a role="menuitem" tabindex="-1" href="/#/apps/{{app.ApplicationId}}/exceptions">{{app.Name}}</a></li>
         <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New Application</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/apps">New Application</a></li>
     </ul>
 </div>

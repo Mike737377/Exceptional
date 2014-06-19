@@ -65,6 +65,10 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.19.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoFixture.3.19.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -152,11 +156,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CassetteConfiguration.cs" />
-    <Compile Include="Controllers\API\V1\ApplicationsApiController.cs" />
+    <Compile Include="Controllers\API\V1\WebApiController.cs" />
     <Compile Include="Controllers\API\V1\ClientApiController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\API\V1\ExceptionsApiController.cs" />
+    <Compile Include="Controllers\ExceptionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserExperienceController.cs" />
     <Compile Include="Controllers\API\V1\UsersApiController.cs" />
@@ -180,6 +184,7 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\dashboard.css" />
+    <Content Include="Content\morris\morris.min.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -248,12 +253,11 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="connectionStrings.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -266,10 +270,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="SiteTemplate.html" />
     <Content Include="Views\Applications\ApplicationModule.ts" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -320,6 +321,7 @@
     <Content Include="Views\Shared\_ApplicationSelector.cshtml" />
     <Content Include="Views\Exceptions\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Applications\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +333,10 @@
     <ProjectReference Include="..\Exceptional.Client.Messages\Exceptional.Client.Messages.csproj">
       <Project>{127c4452-b489-4246-aad2-6c0eb2f61531}</Project>
       <Name>Exceptional.Client.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exceptional.Client\Exceptional.Client.csproj">
+      <Project>{13616c3b-422f-4f1c-83b0-035e3ee7265f}</Project>
+      <Name>Exceptional.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Exceptional\Exceptional.csproj">
       <Project>{7c0e4dec-eec6-4dd2-81fa-ebc13b0fdccb}</Project>

@@ -91,6 +91,7 @@
     <Compile Include="Domain\UserExperience\UserExceperienceViewModel.cs" />
     <Compile Include="ErrorModule.cs" />
     <Compile Include="ExceptionalException.cs" />
+    <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationBus.cs" />
     <Compile Include="Infrastructure\ApplicationBusContext.cs" />

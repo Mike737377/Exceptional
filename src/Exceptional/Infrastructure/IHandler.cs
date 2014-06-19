@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 namespace Exceptional.Infrastructure
 {
     public interface IHandler<TMessage>
-        where TMessage : IMessage
     {
         void Execute(TMessage message);
+    }
+
+    public interface IHandler<TMessage, TReply>
+    {
+        TReply Execute(TMessage message);
     }
 }

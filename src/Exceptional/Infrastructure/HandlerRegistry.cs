@@ -8,15 +8,20 @@ namespace Exceptional.Infrastructure
 {
     public interface IHandlerRegistry
     {
-        IHandler<TMessage> GetHandlerForMessage<TMessage>() where TMessage : IMessage;
+        IHandler<TMessage> GetHandlerForMessage<TMessage>();
+        IHandler<TMessage, TReply> GetHandlerForMessage<TMessage, TReply>();
     }
 
     public class HandlerRegistry : IHandlerRegistry
     {
         public IHandler<TMessage> GetHandlerForMessage<TMessage>()
-            where TMessage : IMessage
         {
             return ServiceFactory.GetInstance<IHandler<TMessage>>();
+        }
+
+        public IHandler<TMessage, TReply> GetHandlerForMessage<TMessage, TReply>()
+        {
+            return ServiceFactory.GetInstance<IHandler<TMessage, TReply>>();
         }
     }
 }

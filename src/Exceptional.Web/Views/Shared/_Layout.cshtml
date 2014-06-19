@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("scripts", false)
+           
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/content/bootstrap/js/bootstrap.min.js"></script>
+    @RenderSection("head", false)
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,24 +31,32 @@
     </div>
 
     @*@Scripts.Render("~/bundles/jquery")*@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/content/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/content/angular/angular.min.js"></script>
+    <script src="/content/angular/angular.min.js"></script>    
     <script src="/content/angular/angular-route.min.js"></script>
+    <script src="/content/angular/angular-animate.min.js"></script>
     <script type="text/javascript">
+        "use strict"
         var app = angular.module("exceptionalApp", ['ngRoute']);
 
         app.config(function ($routeProvider) {
             $routeProvider
-                .when('/applications',
+                .when('/apps',
                 {
                     controller: 'ApplicationsController',
                     templateUrl: '/applications/'
+                })
+                .when('/apps/:appId/exceptions/',
+                {
+                    controller: 'ExceptionsController',
+                    templateUrl: '/exceptions/'
                 })
                 .when('/users',
                 {
                     controller: 'UsersController',
                     templateUrl: '/users/'
+                })
+                .otherwise({
+                    redirectTo: '/apps'
                 });
         });
 
@@ -59,6 +70,28 @@
             init();
         });
 
+        app.controller('ApplicationDetailsController', function ($scope, applicationsFactory, $routeParams) {
+            function init() {
+                applicationsFactory.getApplicationDetails($routeParams.appId).success(function (data) {
+                    $scope.application = data;
+                });
+            }
+
+            init();
+        });
+
+        app.controller('ExceptionsController', function ($scope, applicationsFactory, exceptionsFactory, $routeParams) {
+            function init() {
+                exceptionsFactory.getExceptions($routeParams.appId).success(function (data) {
+                    $scope.exceptions = data;
+                });
+                applicationsFactory.getApplicationDetails($routeParams.appId).success(function (data) {
+                    $scope.application = data;
+                });
+            }
+
+            init();
+        });
 
         app.controller('UsersController', function ($scope, usersFactory) {
             function init() {
@@ -74,7 +107,21 @@
             var factory = {};
 
             factory.getApplications = function () {
-                return $http.get('/api/v1/applications');
+                return $http.get('/api/v1/apps');
+            };
+
+            factory.getApplicationDetails = function (appId) {
+                return $http.get('/api/v1/apps/' + appId);
+            };
+
+            return factory;
+        });
+
+        app.factory('exceptionsFactory', function ($http) {
+            var factory = {};
+
+            factory.getExceptions = function (appId) {
+                return $http.get('/api/v1/apps/' + appId + '/exceptions');
             };
 
             return factory;
@@ -90,6 +137,5 @@
             return factory;
         });
     </script>
-    @RenderSection("scripts", required: false)
 </body>
 </html>

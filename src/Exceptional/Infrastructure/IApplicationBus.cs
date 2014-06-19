@@ -8,8 +8,7 @@ namespace Exceptional.Infrastructure
 {
     public interface IApplicationBus
     {
-        void Send<TMessage>(TMessage message) where TMessage : IMessage;
-
-        void Reply<TMessage>(TMessage message) where TMessage : IMessage;
+        void Send<TMessage>(TMessage message);
+        TReply Send<TMessage, TReply>(TMessage message);
     }
 }

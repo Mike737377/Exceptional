@@ -6,17 +6,19 @@
 <h1 class="page-header">Applications</h1>
 
 <div ng-controller="ApplicationsController">    
-    <table class="table">
+    <table class="table" class="ng-cloak">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Url</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="app in applications">
                 <td>{{app.Name}}</td>
                 <td><a href="{{app.Website}}">{{app.Website}}</a></td>
+                <td><a href="/#/apps/{{app.ApplicationId}}/exceptions">Exceptions</a></td>
             </tr>
         </tbody>
     </table>
